@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>PANEL V1</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; background: #0D1326; font-family: 'Roboto', sans-serif; color: #fff; overflow: hidden; height: 100vh; }
-        
         .app { max-width: 450px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; }
         .title { text-align: center; font-size: 30px; font-weight: 900; color: #51F06B; text-shadow: 0 0 20px rgba(81, 240, 107, 0.4); margin-bottom: 20px; }
-        
         .card { background: rgba(10, 12, 20, 0.85); border: 1px solid rgba(81, 240, 107, 0.1); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
         .dv { display: flex; flex-direction: column; gap: 4px; }
@@ -21,29 +18,24 @@
         .value { color: #fff; font-size: 16px; font-weight: 700; }
         .value.xanh { color: #51F06B; }
         .value.vang { color: #FFCF00; text-shadow: 0 0 10px rgba(255, 207, 0, 0.5); }
-        
         .input_key { background: #1C1E26; border: none; border-radius: 12px; padding: 16px; width: 100%; box-sizing: border-box; color: #fff; font-size: 16px; text-align: center; letter-spacing: 4px; margin-bottom: 16px; outline: none; }
-        
         .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
         .btn { border: none; border-radius: 12px; padding: 14px; width: 100%; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; text-align: center; }
         .btn.xanh { background: #51F06B; color: #000; }
         .btn.tri { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
         .btn.tuong { background: rgba(255,255,255,0.05); color: #8A8B95; border: 1px solid rgba(255,255,255,0.05); margin-top: 10px; }
         .btn.tuong.active { background: #51F06B; color: #000; box-shadow: 0 0 15px rgba(81, 240, 107, 0.4); }
-        
         .card_toggle { background: rgba(10, 12, 20, 0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; display: flex; align-items: center; margin-bottom: 12px; }
         .card_icon { width: 44px; height: 44px; background: rgba(81,240,107,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 14px; font-size: 22px; }
         .card_info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .card_title { color: #fff; font-size: 16px; font-weight: 700; }
         .card_desc { color: #8A8B95; font-size: 12px; }
-        
         .switch { position: relative; display: inline-block; width: 48px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2C2E3A; transition: .4s; border-radius: 24px; }
         .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: #5A5E6B; transition: .4s; border-radius: 50%; }
         input:checked + .slider { background-color: #51F06B; }
         input:checked + .slider:before { transform: translateX(24px); background-color: #fff; }
-
         .lock_overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 9999; }
         .lock_box { background: #141620; border-radius: 24px; padding: 32px 24px; width: 85%; max-width: 320px; border: 1px solid rgba(81, 240, 107, 0.3); }
         .lock_title { color: #fff; font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 24px; }
@@ -70,7 +62,6 @@
 
     <div class="app">
         <div class="title">⚡ PANEL V1☠️</div>
-        
         <div class="card">
             <div class="grid">
                 <div class="dv"><div class="label">STATUS</div><div id="statusText" class="value">OFFLINE</div></div>
@@ -80,9 +71,7 @@
                 <div class="dv"><div class="label">PING</div><div class="value">-- ms</div></div>
                 <div class="dv"><div class="label">EXPIRY</div><div class="value vang">Unlimited</div></div>
             </div>
-            
             <input type="text" id="keyInput" class="input_key" placeholder=". . . . . . . . . . . ." value=". . . . . . . . . . . ." readonly>
-            
             <div class="btn-row">
                 <button class="btn xanh" onclick="activeSystem()">XÁC NHẬN KEY</button>
                 <button class="btn tri">⚡ LẤY KEY FREE</button>
@@ -93,24 +82,21 @@
         <div class="card_toggle">
             <div class="card_icon">🎯</div>
             <div class="card_info"><div class="card_title">AimLock X</div><div class="card_desc">Hỗ trợ ghi tâm vùng đầu</div></div>
-            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" id="aimlockToggle"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
             <div class="card_icon">➕</div>
             <div class="card_info"><div class="card_title">Aimbot Pro</div><div class="card_desc">Bật tâm siêu dính</div></div>
-            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" id="aimbotToggle"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
             <div class="card_icon">📲</div>
             <div class="card_info"><div class="card_title">Boost FPS</div><div class="card_desc">Tối ưu tăng số quét</div></div>
-            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" id="fpsToggle"><span class="slider"></span></label>
         </div>
     </div>
 
     <script>
-        // Đã chuyển sang dùng URL Scheme để mở thẳng game nếu đã cài
-        const URL_SCHEME = "freefiremax://"; 
-
         const passInput = document.getElementById('passInput');
         const togglePassBtn = document.getElementById('togglePassBtn');
         const lockScreen = document.getElementById('lockScreen');
@@ -119,6 +105,12 @@
         const systemText = document.getElementById('systemText');
         const runBtn = document.getElementById('runBtn');
         
+        // Khai báo biến cheat
+        let aimbotActive = false;
+        let aimlockActive = false;
+        let fpsBoostActive = false;
+        let isGameLaunched = false;
+
         function togglePassVis() {
             if(passInput.type === 'password') { passInput.type = 'text'; togglePassBtn.innerText = '🙈'; }
             else { passInput.type = 'password'; togglePassBtn.innerText = '👁️'; }
@@ -141,13 +133,35 @@
             systemText.className = 'value xanh';
             runBtn.innerText = 'KHỞI CHẠY SYSTEM';
             runBtn.className = 'btn xanh';
+            
+            // Đọc trạng thái các nút gạt
+            aimlockActive = document.getElementById('aimlockToggle').checked;
+            aimbotActive = document.getElementById('aimbotToggle').checked;
+            fpsBoostActive = document.getElementById('fpsToggle').checked;
         }
 
         function runSystem() {
             if(systemText.innerText !== 'UNLOCKED') return;
-            
-            // Mở thẳng game. Nếu chưa cài, iOS tự báo lỗi.
-            window.location.href = URL_SCHEME;
+
+            if(!isGameLaunched) {
+                isGameLaunched = true;
+                // Mở game
+                window.location.href = "freefiremax://";
+            }
+
+            // Kích hoạt các hiệu ứng cheat (Mô phỏng logic)
+            if(aimbotActive) {
+                // Code giả lập AimBot: Tự động chỉnh tâm về đầu địch
+                console.log("Aimbot Kích hoạt");
+            }
+            if(aimlockActive) {
+                // Code giả lập AimLock: Khóa mục tiêu khi bấm
+                console.log("AimLock Kích hoạt");
+            }
+            if(fpsBoostActive) {
+                // Code giả lập FPS: Tối ưu bộ nhớ
+                console.log("FPS Boost Kích hoạt");
+            }
         }
 
         passInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPass(); } });
