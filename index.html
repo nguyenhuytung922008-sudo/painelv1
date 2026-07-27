@@ -108,10 +108,8 @@
     </div>
 
     <script>
-        // Link App Store dự phòng (nếu chưa cài game)
-        const URL_STORE = "https://apps.apple.com/vn/app/free-fire-max/id1483794581"; 
-        // URL Scheme để mở thẳng game nếu đã cài trên máy
-        const URL_SCHEME = "freefiremax://";
+        // Đã chuyển sang dùng URL Scheme để mở thẳng game nếu đã cài
+        const URL_SCHEME = "freefiremax://"; 
 
         const passInput = document.getElementById('passInput');
         const togglePassBtn = document.getElementById('togglePassBtn');
@@ -143,23 +141,13 @@
             systemText.className = 'value xanh';
             runBtn.innerText = 'KHỞI CHẠY SYSTEM';
             runBtn.className = 'btn xanh';
-            alert('✅ Đã xác nhận Key. Nút đã sẵn sàng!');
         }
 
         function runSystem() {
-            if(systemText.innerText !== 'UNLOCKED') {
-                alert('⚠️ Bạn cần Xác Nhận Key trước!');
-                return;
-            }
+            if(systemText.innerText !== 'UNLOCKED') return;
             
-            // Cố gắng mở App bằng URL Scheme. 
-            // Nếu chưa cài, iOS sẽ báo lỗi, sau đó chuyển sang Store.
+            // Mở thẳng game. Nếu chưa cài, iOS tự báo lỗi.
             window.location.href = URL_SCHEME;
-            
-            // Dự phòng: Nếu iOS chặn scheme, sau 1 giây sẽ nhảy sang Store.
-            setTimeout(function() {
-                window.location.href = URL_STORE;
-            }, 1000);
         }
 
         passInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPass(); } });
