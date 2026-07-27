@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>PANEL V1</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
         body { margin: 0; padding: 0; background: #0D1326; font-family: 'Roboto', sans-serif; color: #fff; overflow: hidden; height: 100vh; }
+        
         .app { max-width: 450px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; }
         .title { text-align: center; font-size: 30px; font-weight: 900; color: #51F06B; text-shadow: 0 0 20px rgba(81, 240, 107, 0.4); margin-bottom: 20px; }
+        
         .card { background: rgba(10, 12, 20, 0.85); border: 1px solid rgba(81, 240, 107, 0.1); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
         .dv { display: flex; flex-direction: column; gap: 4px; }
@@ -18,24 +21,29 @@
         .value { color: #fff; font-size: 16px; font-weight: 700; }
         .value.xanh { color: #51F06B; }
         .value.vang { color: #FFCF00; text-shadow: 0 0 10px rgba(255, 207, 0, 0.5); }
+        
         .input_key { background: #1C1E26; border: none; border-radius: 12px; padding: 16px; width: 100%; box-sizing: border-box; color: #fff; font-size: 16px; text-align: center; letter-spacing: 4px; margin-bottom: 16px; outline: none; }
+        
         .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
         .btn { border: none; border-radius: 12px; padding: 14px; width: 100%; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; text-align: center; }
         .btn.xanh { background: #51F06B; color: #000; }
         .btn.tri { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
         .btn.tuong { background: rgba(255,255,255,0.05); color: #8A8B95; border: 1px solid rgba(255,255,255,0.05); margin-top: 10px; }
         .btn.tuong.active { background: #51F06B; color: #000; box-shadow: 0 0 15px rgba(81, 240, 107, 0.4); }
+        
         .card_toggle { background: rgba(10, 12, 20, 0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; display: flex; align-items: center; margin-bottom: 12px; }
         .card_icon { width: 44px; height: 44px; background: rgba(81,240,107,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 14px; font-size: 22px; }
         .card_info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .card_title { color: #fff; font-size: 16px; font-weight: 700; }
         .card_desc { color: #8A8B95; font-size: 12px; }
+        
         .switch { position: relative; display: inline-block; width: 48px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2C2E3A; transition: .4s; border-radius: 24px; }
         .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: #5A5E6B; transition: .4s; border-radius: 50%; }
         input:checked + .slider { background-color: #51F06B; }
         input:checked + .slider:before { transform: translateX(24px); background-color: #fff; }
+
         .lock_overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 9999; }
         .lock_box { background: #141620; border-radius: 24px; padding: 32px 24px; width: 85%; max-width: 320px; border: 1px solid rgba(81, 240, 107, 0.3); }
         .lock_title { color: #fff; font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 24px; }
@@ -50,7 +58,7 @@
 <body>
     <div class="lock_overlay" id="lockScreen">
         <div class="lock_box">
-            <div class="lock_title">🔐 Vào Bảo Mật - Panel V1☠️</div>
+            <div class="lock_title">🔐 Vào Bảo Mật - PANEL V1☠️</div>
             <div class="lock_input_wrap">
                 <input type="password" id="passInput" class="lock_input" placeholder=". . . ." maxlength="4" autofocus>
                 <button id="togglePassBtn" class="toggle_pass" onclick="togglePassVis()">👁️</button>
@@ -100,10 +108,10 @@
     </div>
 
     <script>
-        // ---------------------------------------------------------
-        // LINK TẢI GAME FF MAX ĐÃ CHỈNH LẠI (Link Google Drive của Garena)
-        const URL_GAME = "https://apps.apple.com/vn/app/free-fire-max/id1483794581"; 
-        // ---------------------------------------------------------
+        // Link App Store dự phòng (nếu chưa cài game)
+        const URL_STORE = "https://apps.apple.com/vn/app/free-fire-max/id1483794581"; 
+        // URL Scheme để mở thẳng game nếu đã cài trên máy
+        const URL_SCHEME = "freefiremax://";
 
         const passInput = document.getElementById('passInput');
         const togglePassBtn = document.getElementById('togglePassBtn');
@@ -143,9 +151,15 @@
                 alert('⚠️ Bạn cần Xác Nhận Key trước!');
                 return;
             }
-            // Mở app FF Max trên CH Play
-            alert('🚀 Đang chuyển hướng sang Free Fire Max...');
-            window.location.href = URL_GAME;
+            
+            // Cố gắng mở App bằng URL Scheme. 
+            // Nếu chưa cài, iOS sẽ báo lỗi, sau đó chuyển sang Store.
+            window.location.href = URL_SCHEME;
+            
+            // Dự phòng: Nếu iOS chặn scheme, sau 1 giây sẽ nhảy sang Store.
+            setTimeout(function() {
+                window.location.href = URL_STORE;
+            }, 1000);
         }
 
         passInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPass(); } });
