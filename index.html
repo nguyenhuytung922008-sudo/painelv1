@@ -82,17 +82,17 @@
         <div class="card_toggle">
             <div class="card_icon">🎯</div>
             <div class="card_info"><div class="card_title">AimLock X</div><div class="card_desc">Hỗ trợ ghi tâm vùng đầu</div></div>
-            <label class="switch"><input type="checkbox" id="aimlockToggle"><span class="slider"></span></label>
+            <label class="switch" onchange="toggleCheat('AimLock X', this.querySelector('input').checked)"><input type="checkbox" id="aimlockToggle"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
             <div class="card_icon">➕</div>
             <div class="card_info"><div class="card_title">Aimbot Pro</div><div class="card_desc">Bật tâm siêu dính</div></div>
-            <label class="switch"><input type="checkbox" id="aimbotToggle"><span class="slider"></span></label>
+            <label class="switch" onchange="toggleCheat('Aimbot Pro', this.querySelector('input').checked)"><input type="checkbox" id="aimbotToggle"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
             <div class="card_icon">📲</div>
             <div class="card_info"><div class="card_title">Boost FPS</div><div class="card_desc">Tối ưu tăng số quét</div></div>
-            <label class="switch"><input type="checkbox" id="fpsToggle"><span class="slider"></span></label>
+            <label class="switch" onchange="toggleCheat('Boost FPS', this.querySelector('input').checked)"><input type="checkbox" id="fpsToggle"><span class="slider"></span></label>
         </div>
     </div>
 
@@ -105,11 +105,7 @@
         const systemText = document.getElementById('systemText');
         const runBtn = document.getElementById('runBtn');
         
-        // Khai báo biến cheat
-        let aimbotActive = false;
-        let aimlockActive = false;
-        let fpsBoostActive = false;
-        let isGameLaunched = false;
+        let isSystemActive = false;
 
         function togglePassVis() {
             if(passInput.type === 'password') { passInput.type = 'text'; togglePassBtn.innerText = '🙈'; }
@@ -126,6 +122,19 @@
             }
         }
 
+        // Hàm thông báo và kích hoạt Cheat
+        function toggleCheat(name, status) {
+            if(!isSystemActive) {
+                alert('Bạn phải bấm "XÁC NHẬN KEY" trước khi bật chức năng!');
+                document.getElementById(name === 'AimLock X' ? 'aimlockToggle' : name === 'Aimbot Pro' ? 'aimbotToggle' : 'fpsToggle').checked = false;
+                return;
+            }
+            let msg = status ? 'Đã BẬT' : 'Đã TẮT';
+            alert(`[${name}] ${msg}. Đã tiêm kích hoạt vào hệ thống.`);
+            // Code thực thi (mô phỏng)
+            console.log(`[CHEAT] ${name}: ${status}`);
+        }
+
         function activeSystem() {
             statusText.innerText = 'ONLINE';
             statusText.className = 'value xanh';
@@ -133,35 +142,38 @@
             systemText.className = 'value xanh';
             runBtn.innerText = 'KHỞI CHẠY SYSTEM';
             runBtn.className = 'btn xanh';
-            
-            // Đọc trạng thái các nút gạt
-            aimlockActive = document.getElementById('aimlockToggle').checked;
-            aimbotActive = document.getElementById('aimbotToggle').checked;
-            fpsBoostActive = document.getElementById('fpsToggle').checked;
+            isSystemActive = true;
+            alert('✅ Hệ thống đã sẵn sàng. Bạn có thể bật các chức năng Cheat.');
         }
 
+        // Kích hoạt nút Run
         function runSystem() {
-            if(systemText.innerText !== 'UNLOCKED') return;
+            if(!isSystemActive) {
+                alert('⚠️ Bạn cần Xác Nhận Key trước!');
+                return;
+            }
+            // Bắt đầu chạy chức năng Cheat
+            alert('🚀 Đang khởi chạy hệ thống Cheat...');
+            
+            // Lấy trạng thái hiện tại
+            let aimlock = document.getElementById('aimlockToggle').checked;
+            let aimbot = document.getElementById('aimbotToggle').checked;
+            let fps = document.getElementById('fpsToggle').checked;
 
-            if(!isGameLaunched) {
-                isGameLaunched = true;
-                // Mở game
-                window.location.href = "freefiremax://";
-            }
-
-            // Kích hoạt các hiệu ứng cheat (Mô phỏng logic)
-            if(aimbotActive) {
-                // Code giả lập AimBot: Tự động chỉnh tâm về đầu địch
-                console.log("Aimbot Kích hoạt");
-            }
-            if(aimlockActive) {
-                // Code giả lập AimLock: Khóa mục tiêu khi bấm
-                console.log("AimLock Kích hoạt");
-            }
-            if(fpsBoostActive) {
-                // Code giả lập FPS: Tối ưu bộ nhớ
-                console.log("FPS Boost Kích hoạt");
-            }
+            // Gửi lệnh kích hoạt game (Mô phỏng Inject script vào game)
+            // Đoạn script dưới đây mô phỏng việc tìm kiếm và bật chức năng
+            let injectCode = `
+                // [MEMORY INJECTION TARGET]
+                Target_Game_Process: FreeFireMax
+                Payload_Status: Loaded
+                AimLock_X: ${aimlock}
+                Aimbot_Pro: ${aimbot}
+                Boost_FPS: ${fps}
+            `;
+            console.log(injectCode);
+            
+            // Mở game bằng URL Scheme
+            window.location.href = "freefiremax://";
         }
 
         passInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPass(); } });
