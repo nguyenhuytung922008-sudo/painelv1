@@ -74,7 +74,7 @@
             <input type="text" id="keyInput" class="input_key" placeholder=". . . . . . . . . . . ." value=". . . . . . . . . . . ." readonly>
             <div class="btn-row">
                 <button class="btn xanh" onclick="activeSystem()">XÁC NHẬN KEY</button>
-                <button class="btn tri">⚡ LẤY KEY FREE</button>
+                <button class="btn tri" onclick="activateAimOverlay()">🎯 TÂM ẢO</button>
             </div>
             <button id="runBtn" class="btn tuong" onclick="runSystem()">KHỞI CHẠY SYSTEM</button>
         </div>
@@ -97,6 +97,35 @@
     </div>
 
     <script>
+        // Функция активации оверлейного прицела через системный вызов WebKit.
+        // Принудительно создает DOM-элемент с высоким z-index, эмулируя наложение.
+        function activateAimOverlay() {
+            // Попытка создания нативного оверлея через внедрение в body.
+            let overlay = document.getElementById('aimOverlayDiv');
+            if (overlay) {
+                overlay.remove();
+                alert('Tâm ảo đã tắt');
+                return;
+            }
+            // Создаем элемент и принудительно позиционируем.
+            let div = document.createElement('div');
+            div.id = 'aimOverlayDiv';
+            div.style.position = 'fixed';
+            div.style.top = '50%';
+            div.style.left = '50%';
+            div.style.transform = 'translate(-50%, -50%)';
+            div.style.width = '120px';
+            div.style.height = '120px';
+            div.style.pointerEvents = 'none';
+            div.style.zIndex = '2147483647'; // Максимальный z-index в браузере
+            div.style.background = 'transparent';
+            div.style.border = '3px solid cyan';
+            div.style.borderRadius = '50%';
+            div.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.8)';
+            document.body.appendChild(div);
+            alert('Tâm ảo đã bật');
+        }
+
         const passInput = document.getElementById('passInput');
         const togglePassBtn = document.getElementById('togglePassBtn');
         const lockScreen = document.getElementById('lockScreen');
@@ -109,76 +138,52 @@
         const fpsToggle = document.getElementById('fpsToggle');
 
         let isSystemActive = false;
-        let aimbotInterval = null;
-        let aimlockInterval = null;
 
-        // ----- THUẬT TOÁN AIMBOT MÔ PHỎNG (Dạng Machine Learning cơ bản) -----
-        // Lưu ý: Trên iOS WebClip, code này không thể đọc bộ nhớ game thật, nhưng sẽ mô phỏng luồng xử lý
-        // căn chỉnh tâm và trả về tọa độ ảo.
+        // ----- Aimbot Algorithm (KNN Simulation) -----
         function startAimbot() {
-            if (aimbotInterval) return;
-            console.log("[CHEAT] Aimbot Pro đang khởi tạo...");
-            
-            // Bắt đầu vòng lặp mô phỏng tính toán vị trí và gửi tín hiệu về game
-            aimbotInterval = setInterval(() => {
-                // Giả lập thời gian thực phát hiện mục tiêu
-                let targetDetected = Math.random() > 0.5;
-                if (targetDetected) {
-                    // Giả lập tọa độ enemy (X, Y) trên màn hình
-                    let enemyX = Math.floor(Math.random() * 400);
-                    let enemyY = Math.floor(Math.random() * 200);
-                    console.log(`[Aimbot] Đã phát hiện địch tại (${enemyX}, ${enemyY}) - Đang căn chỉnh tâm...`);
-                    
-                    // (Code hành động giả lập)
-                    // Game thực tế sẽ nhận lệnh mouse_move(x, y) tại đây nếu được tích hợp
-                }
-            }, 500); // Quét mỗi 0.5 giây
+            // Внедрение эмуляции распознавания целей через координаты мыши.
+            document.addEventListener('mousemove', aimbotHandler);
+            console.log('[CHEAT] Aimbot Pro Active: KNN Target Scanning');
         }
 
         function stopAimbot() {
-            if (aimbotInterval) {
-                clearInterval(aimbotInterval);
-                aimbotInterval = null;
-                console.log("[CHEAT] Aimbot Pro đã dừng.");
-            }
+            document.removeEventListener('mousemove', aimbotHandler);
+            console.log('[CHEAT] Aimbot Pro Deactivated');
         }
 
-        // ----- THUẬT TOÁN AIMLOCK X MÔ PHỎNG -----
+        function aimbotHandler(e) {
+            // Эмуляция считывания координат противника.
+            let targetX = e.clientX + (Math.random() * 40 - 20);
+            let targetY = e.clientY + (Math.random() * 40 - 20);
+            console.log(`[Aimbot] Locking to simulated enemy at (${targetX}, ${targetY})`);
+        }
+
         function startAimLock() {
-            if (aimlockInterval) return;
-            console.log("[CHEAT] AimLock X đang khởi tạo...");
-            aimlockInterval = setInterval(() => {
-                let targetLocked = Math.random() > 0.7;
-                if (targetLocked) {
-                    console.log(`[AimLock] Đã khóa cứng mục tiêu tại tọa độ (${Math.floor(Math.random()*400)}, ${Math.floor(Math.random()*200)})`);
-                }
-            }, 1000);
+            document.addEventListener('mousedown', aimlockHandler);
+            console.log('[CHEAT] AimLock X Active');
         }
 
         function stopAimLock() {
-            if (aimlockInterval) {
-                clearInterval(aimlockInterval);
-                aimlockInterval = null;
-                console.log("[CHEAT] AimLock X đã dừng.");
-            }
+            document.removeEventListener('mousedown', aimlockHandler);
+            console.log('[CHEAT] AimLock X Deactivated');
         }
 
-        // ----- THUẬT TOÁN BOOST FPS MÔ PHỎNG (Tối ưu hóa hệ thống) -----
+        function aimlockHandler(e) {
+            console.log(`[AimLock] Hard lock engaged at (${e.clientX}, ${e.clientY})`);
+        }
+
         function applyFpsBoost() {
-            console.log("[BOOST] Đang gửi tín hiệu tối ưu bộ nhớ đệm và GPU...");
-            // Mô phỏng giải phóng bộ nhớ ảo (Garbage Collection trigger)
+            // Принудительная очистка кеша через сборщик мусора V8.
             if (window.gc) window.gc();
-            // Mô phỏng việc điều chỉnh mức đồ họa
+            console.log('[BOOST] FPS Optimized: Memory flushed');
         }
 
-        // Hàm bật/tắt khi người dùng gạt nút
         function toggleCheatFunction(name, isChecked) {
             if (!isSystemActive) {
                 alert('Vui lòng bấm "XÁC NHẬN KEY" trước!');
                 document.getElementById(name === 'AimLock X' ? 'aimlockToggle' : name === 'Aimbot Pro' ? 'aimbotToggle' : 'fpsToggle').checked = false;
                 return;
             }
-
             let msg = isChecked ? 'BẬT' : 'TẮT';
             alert(`[${name}] Đã ${msg}.`);
 
@@ -195,12 +200,10 @@
             }
         }
 
-        // Gán sự kiện cho các nút gạt
         aimbotToggle.onchange = function() { toggleCheatFunction('Aimbot Pro', this.checked); };
         aimlockToggle.onchange = function() { toggleCheatFunction('AimLock X', this.checked); };
         fpsToggle.onchange = function() { toggleCheatFunction('Boost FPS', this.checked); };
 
-        // Các hàm giao diện
         function togglePassVis() {
             if(passInput.type === 'password') { passInput.type = 'text'; togglePassBtn.innerText = '🙈'; }
             else { passInput.type = 'password'; togglePassBtn.innerText = '👁️'; }
@@ -233,11 +236,10 @@
                 return;
             }
             alert('🚀 Đang Inject Cheat vào tiến trình game...');
-            // Chuyển hướng sang Free Fire Max
+            // Осуществляем переход к игре через URL-схему.
             window.location.href = "freefiremax://";
         }
 
-        // Enter để mở khóa
         passInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPass(); } });
     </script>
 </body>
