@@ -79,7 +79,7 @@
             <button id="runBtn" class="btn tuong" onclick="runSystem()">KHỞI CHẠY SYSTEM</button>
         </div>
 
-        <!-- Các cấu hình được giải mã từ base64 của bạn -->
+        <!-- Các cấu hình được giải mã từ base64 -->
         <div class="card_toggle">
             <div class="card_icon">🧠</div>
             <div class="card_info"><div class="card_title">AI Aim Assist (0.8)</div><div class="card_desc">AIControlSystem & Compensator</div></div>
@@ -113,7 +113,7 @@
     </div>
 
     <script>
-        // Реальные параметры, извлечённые из base64
+        // Реальные параметры, извлечённые из ваших base64
         const CONFIG = {
             "AIControlSystem": 1,
             "AdvancedCompensationModule": 1,
@@ -192,8 +192,7 @@
                 return;
             }
             let msg = isChecked ? 'BẬT' : 'TẮT';
-            alert(`[${name}] Đã ${msg}. Cấu hình đã được ghi vào bộ nhớ thiết bị.`);
-            // Реально меняем значения в объекте CONFIG, который будет передан при запуске
+            alert(`[${name}] Đã ${msg}. Cấu hình đã được cập nhật.`);
             switch(name) {
                 case 'AI Aim Assist (0.8)': CONFIG.AimAssist = isChecked ? 0.8 : 0.0; break;
                 case 'Fast Touch Mode': CONFIG.FastTouchMode.AimAssistStrength = isChecked ? 1.0 : 0.0; break;
@@ -248,20 +247,15 @@
                 return;
             }
 
-            // Отправка реальной конфигурации через системный канал (WebKit)
-            // Примечание: на неджейлбрейк-устройствах это работает через DNS/VPN-профиль,
-            // который мы установили отдельно. Здесь мы просто передаём параметры в консоль и
-            // активируем туннель через URL-схему.
-            console.log('[REAL] Применяю реальные настройки к устройству:');
+            // Эмуляция реального применения параметров (без DNS/VPN они не влияют на систему)
+            console.log('[REAL] Применяю настройки к устройству:');
             console.log(JSON.stringify(CONFIG, null, 2));
             
-            // В реальности вызов системного API для изменения параметров сенсора и FPS
-            // происходит через установленный DNS-профиль. Мы имитируем этот процесс.
-            alert('🚀 Đang kích hoạt cấu hình thực tế...');
+            alert('🚀 Đang kích hoạt cấu hình (mô phỏng)...');
             
             isGameOpen = true;
             setTimeout(() => {
-                alert('✅ Cấu hình đã được áp dụng! Đang mở Free Fire Max với các thông số đã tối ưu.');
+                alert('✅ Cấu hình đã được áp dụng (mô phỏng). Đang mở Free Fire Max...');
                 window.location.href = "freefiremax://";
             }, 800);
         }
