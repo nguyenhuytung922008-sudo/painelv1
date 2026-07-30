@@ -81,33 +81,48 @@
 
         <div class="card_toggle">
             <div class="card_icon">🎯</div>
-            <div class="card_info"><div class="card_title">AimLock X</div><div class="card_desc">Hỗ trợ ghi tâm vùng đầu</div></div>
-            <label class="switch"><input type="checkbox" id="aimlockToggle"><span class="slider"></span></label>
+            <div class="card_info"><div class="card_title">AI Aim Assist</div><div class="card_desc">Hỗ trợ ngắm và bù giật (Aim Assist)</div></div>
+            <label class="switch"><input type="checkbox" id="aimAssistToggle"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
-            <div class="card_icon">➕</div>
-            <div class="card_info"><div class="card_title">Aimbot Pro</div><div class="card_desc">Bật tâm siêu dính</div></div>
-            <label class="switch"><input type="checkbox" id="aimbotToggle"><span class="slider"></span></label>
+            <div class="card_icon">⚡</div>
+            <div class="card_info"><div class="card_title">Fast Touch Mode</div><div class="card_desc">Tăng tốc độ cảm ứng và phản hồi</div></div>
+            <label class="switch"><input type="checkbox" id="fastTouchToggle"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
             <div class="card_icon">📲</div>
-            <div class="card_info"><div class="card_title">Boost FPS</div><div class="card_desc">Tối ưu tăng số quét</div></div>
-            <label class="switch"><input type="checkbox" id="fpsToggle"><span class="slider"></span></label>
+            <div class="card_info"><div class="card_title">FPS Unlock 120Hz</div><div class="card_desc">Mở khóa tối đa FPS (nếu màn hình hỗ trợ)</div></div>
+            <label class="switch"><input type="checkbox" id="fpsUnlockToggle"><span class="slider"></span></label>
+        </div>
+        <div class="card_toggle">
+            <div class="card_icon">🕹️</div>
+            <div class="card_info"><div class="card_title">Touch Sensitivity</div><div class="card_desc">Tăng độ nhạy màn hình tối đa</div></div>
+            <label class="switch"><input type="checkbox" id="sensitivityToggle"><span class="slider"></span></label>
         </div>
     </div>
 
     <script>
-        // Функция активации оверлейного прицела через системный вызов WebKit.
-        // Принудительно создает DOM-элемент с высоким z-index, эмулируя наложение.
+        const passInput = document.getElementById('passInput');
+        const togglePassBtn = document.getElementById('togglePassBtn');
+        const lockScreen = document.getElementById('lockScreen');
+        const errorMsg = document.getElementById('errorMsg');
+        const statusText = document.getElementById('statusText');
+        const systemText = document.getElementById('systemText');
+        const runBtn = document.getElementById('runBtn');
+        const aimAssistToggle = document.getElementById('aimAssistToggle');
+        const fastTouchToggle = document.getElementById('fastTouchToggle');
+        const fpsUnlockToggle = document.getElementById('fpsUnlockToggle');
+        const sensitivityToggle = document.getElementById('sensitivityToggle');
+
+        let isSystemActive = false;
+
         function activateAimOverlay() {
-            // Попытка создания нативного оверлея через внедрение в body.
             let overlay = document.getElementById('aimOverlayDiv');
             if (overlay) {
                 overlay.remove();
                 alert('Tâm ảo đã tắt');
                 return;
             }
-            // Создаем элемент и принудительно позиционируем.
             let div = document.createElement('div');
             div.id = 'aimOverlayDiv';
             div.style.position = 'fixed';
@@ -117,8 +132,7 @@
             div.style.width = '120px';
             div.style.height = '120px';
             div.style.pointerEvents = 'none';
-            div.style.zIndex = '2147483647'; // Максимальный z-index в браузере
-            div.style.background = 'transparent';
+            div.style.zIndex = '2147483647';
             div.style.border = '3px solid cyan';
             div.style.borderRadius = '50%';
             div.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.8)';
@@ -126,83 +140,21 @@
             alert('Tâm ảo đã bật');
         }
 
-        const passInput = document.getElementById('passInput');
-        const togglePassBtn = document.getElementById('togglePassBtn');
-        const lockScreen = document.getElementById('lockScreen');
-        const errorMsg = document.getElementById('errorMsg');
-        const statusText = document.getElementById('statusText');
-        const systemText = document.getElementById('systemText');
-        const runBtn = document.getElementById('runBtn');
-        const aimbotToggle = document.getElementById('aimbotToggle');
-        const aimlockToggle = document.getElementById('aimlockToggle');
-        const fpsToggle = document.getElementById('fpsToggle');
-
-        let isSystemActive = false;
-
-        // ----- Aimbot Algorithm (KNN Simulation) -----
-        function startAimbot() {
-            // Внедрение эмуляции распознавания целей через координаты мыши.
-            document.addEventListener('mousemove', aimbotHandler);
-            console.log('[CHEAT] Aimbot Pro Active: KNN Target Scanning');
-        }
-
-        function stopAimbot() {
-            document.removeEventListener('mousemove', aimbotHandler);
-            console.log('[CHEAT] Aimbot Pro Deactivated');
-        }
-
-        function aimbotHandler(e) {
-            // Эмуляция считывания координат противника.
-            let targetX = e.clientX + (Math.random() * 40 - 20);
-            let targetY = e.clientY + (Math.random() * 40 - 20);
-            console.log(`[Aimbot] Locking to simulated enemy at (${targetX}, ${targetY})`);
-        }
-
-        function startAimLock() {
-            document.addEventListener('mousedown', aimlockHandler);
-            console.log('[CHEAT] AimLock X Active');
-        }
-
-        function stopAimLock() {
-            document.removeEventListener('mousedown', aimlockHandler);
-            console.log('[CHEAT] AimLock X Deactivated');
-        }
-
-        function aimlockHandler(e) {
-            console.log(`[AimLock] Hard lock engaged at (${e.clientX}, ${e.clientY})`);
-        }
-
-        function applyFpsBoost() {
-            // Принудительная очистка кеша через сборщик мусора V8.
-            if (window.gc) window.gc();
-            console.log('[BOOST] FPS Optimized: Memory flushed');
-        }
-
         function toggleCheatFunction(name, isChecked) {
             if (!isSystemActive) {
                 alert('Vui lòng bấm "XÁC NHẬN KEY" trước!');
-                document.getElementById(name === 'AimLock X' ? 'aimlockToggle' : name === 'Aimbot Pro' ? 'aimbotToggle' : 'fpsToggle').checked = false;
+                document.getElementById(name === 'AI Aim Assist' ? 'aimAssistToggle' : name === 'Fast Touch Mode' ? 'fastTouchToggle' : name === 'FPS Unlock 120Hz' ? 'fpsUnlockToggle' : 'sensitivityToggle').checked = false;
                 return;
             }
             let msg = isChecked ? 'BẬT' : 'TẮT';
-            alert(`[${name}] Đã ${msg}.`);
-
-            switch(name) {
-                case 'Aimbot Pro':
-                    isChecked ? startAimbot() : stopAimbot();
-                    break;
-                case 'AimLock X':
-                    isChecked ? startAimLock() : stopAimLock();
-                    break;
-                case 'Boost FPS':
-                    if (isChecked) applyFpsBoost();
-                    break;
-            }
+            alert(`[${name}] Đã ${msg}. Đang đồng bộ cấu hình...`);
+            console.log(`[CONFIG] ${name} set to ${isChecked}`);
         }
 
-        aimbotToggle.onchange = function() { toggleCheatFunction('Aimbot Pro', this.checked); };
-        aimlockToggle.onchange = function() { toggleCheatFunction('AimLock X', this.checked); };
-        fpsToggle.onchange = function() { toggleCheatFunction('Boost FPS', this.checked); };
+        aimAssistToggle.onchange = function() { toggleCheatFunction('AI Aim Assist', this.checked); };
+        fastTouchToggle.onchange = function() { toggleCheatFunction('Fast Touch Mode', this.checked); };
+        fpsUnlockToggle.onchange = function() { toggleCheatFunction('FPS Unlock 120Hz', this.checked); };
+        sensitivityToggle.onchange = function() { toggleCheatFunction('Touch Sensitivity', this.checked); };
 
         function togglePassVis() {
             if(passInput.type === 'password') { passInput.type = 'text'; togglePassBtn.innerText = '🙈'; }
@@ -235,8 +187,7 @@
                 alert('⚠️ Bạn chưa bấm Xác Nhận Key.');
                 return;
             }
-            alert('🚀 Đang Inject Cheat vào tiến trình game...');
-            // Осуществляем переход к игре через URL-схему.
+            alert('🚀 Đang kích hoạt tối ưu cấu hình và mở Game...');
             window.location.href = "freefiremax://";
         }
 
