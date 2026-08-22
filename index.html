@@ -45,12 +45,46 @@
         .lock_btn:active { transform: scale(0.95); }
         .lock_error { display: none; color: #FF3131; font-size: 14px; text-align: center; margin-top: 12px; }
         
-        /* Dropdown */
-        .dropdown { position: relative; display: inline-block; width: 100%; }
-        .dropbtn { background-color: #2A0000; color: white; padding: 14px; font-size: 14px; border: 1px solid #FF3131; border-radius: 12px; cursor: pointer; width: 100%; text-align: center; }
-        .dropbtn:hover, .dropbtn:focus { background-color: #3A0000; }
-        .dropdown-content { display: none; position: absolute; background-color: #1A0000; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8); border: 1px solid #FF3131; border-radius: 12px; z-index: 1; width: 100%; }
-        .dropdown-content div { color: white; padding: 12px 16px; text-decoration: none; display: block; cursor: pointer; text-align: center; border-bottom: 1px solid #2A0000; }
+        /* Nút tùy chọn dạng Dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .dropbtn {
+            background-color: #2A0000;
+            color: white;
+            padding: 14px;
+            font-size: 14px;
+            border: 1px solid #FF3131;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #3A0000;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1A0000;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+            border: 1px solid #FF3131;
+            border-radius: 12px;
+            z-index: 1;
+            width: 100%;
+        }
+        .dropdown-content div {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+            text-align: center;
+            border-bottom: 1px solid #2A0000;
+        }
         .dropdown-content div:hover {background-color: #3A0000;}
         .show {display: block;}
     </style>
@@ -116,7 +150,6 @@
     </div>
 
     <script>
-        // URL chính xác để mở đúng bản
         const URL_TH = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
         const URL_MAX = "https://play.google.com/store/apps/details?id=com.dts.freefiremax";
         let selectedGame = "MAX"; // Mặc định là Max
