@@ -44,7 +44,7 @@
         .lock_btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #FF3131; color: #000; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.2s; }
         .lock_btn:active { transform: scale(0.95); }
         .lock_error { display: none; color: #FF3131; font-size: 14px; text-align: center; margin-top: 12px; }
-        
+
         /* Dropdown */
         .dropdown { position: relative; display: inline-block; width: 100%; }
         .dropbtn { background-color: #2A0000; color: white; padding: 14px; font-size: 14px; border: 1px solid #FF3131; border-radius: 12px; cursor: pointer; width: 100%; text-align: center; }
@@ -53,6 +53,8 @@
         .dropdown-content div { color: white; padding: 12px 16px; text-decoration: none; display: block; cursor: pointer; text-align: center; border-bottom: 1px solid #2A0000; }
         .dropdown-content div:hover {background-color: #3A0000;}
         .show {display: block;}
+
+        /* Popup key */
         .key-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1A0000; border: 1px solid #FF3131; padding: 20px; border-radius: 12px; z-index: 10000; text-align: center; display: none; width: 80%; max-width: 300px; }
         .key-popup button { margin-top: 12px; background: #FF3131; color: #000; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
     </style>
@@ -71,7 +73,6 @@
 
     <div class="app">
         <div class="title">⚡ PANEL V1☠️</div>
-        
         <div class="card">
             <div class="grid">
                 <div class="dv"><div class="label">STATUS</div><div id="statusText" class="value">OFFLINE</div></div>
@@ -81,9 +82,9 @@
                 <div class="dv"><div class="label">PING</div><div class="value">-- ms</div></div>
                 <div class="dv"><div class="label">EXPIRY</div><div class="value vang">Unlimited</div></div>
             </div>
-            
+
             <input type="text" id="keyInput" class="input_key" placeholder=". . . . . . . . . . . ." value=". . . . . . . . . . . ." readonly>
-            
+
             <!-- Dropdown chọn bản game -->
             <div class="dropdown">
                 <button onclick="toggleDropdown()" class="dropbtn" id="gameSelectorBtn">Chọn Bản Game</button>
@@ -125,10 +126,10 @@
     </div>
 
     <script>
-        // URL chính xác để mở game theo Scheme (chạy thẳng nếu có trên máy)
+        // Mở thẳng app game bằng URL Scheme (chỉ hoạt động nếu app đã có trên máy)
         const URL_TH = "freefireth://";
         const URL_MAX = "freefiremax://";
-        let selectedGame = "MAX"; // Mặc định là Max
+        let selectedGame = "MAX";
 
         const passInput = document.getElementById('passInput');
         const lockScreen = document.getElementById('lockScreen');
@@ -136,8 +137,7 @@
         const statusText = document.getElementById('statusText');
         const systemText = document.getElementById('systemText');
         const runBtn = document.getElementById('runBtn');
-        
-        // Xử lý mật khẩu (không cho hiện/ẩn)
+
         function checkPass() {
             if(passInput.value === '2008') {
                 lockScreen.style.display = 'none';
@@ -148,12 +148,10 @@
             }
         }
 
-        // Dropdown
         function toggleDropdown() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
 
-        // Đóng dropdown khi bấm ra ngoài
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
