@@ -8,60 +8,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; background: #0D1326; font-family: 'Roboto', sans-serif; color: #fff; overflow: hidden; height: 100vh; }
+        body { margin: 0; padding: 0; background: #1A0000; font-family: 'Roboto', sans-serif; color: #fff; overflow: hidden; height: 100vh; }
         .app { max-width: 450px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; }
-        .title { text-align: center; font-size: 30px; font-weight: 900; color: #51F06B; text-shadow: 0 0 20px rgba(81, 240, 107, 0.4); margin-bottom: 20px; }
-        .card { background: rgba(10, 12, 20, 0.85); border: 1px solid rgba(81, 240, 107, 0.1); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
+        .title { text-align: center; font-size: 30px; font-weight: 900; color: #FF3131; text-shadow: 0 0 20px rgba(255, 49, 49, 0.6); margin-bottom: 20px; }
+        .card { background: rgba(30, 0, 0, 0.85); border: 1px solid rgba(255, 49, 49, 0.2); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
         .dv { display: flex; flex-direction: column; gap: 4px; }
-        .label { color: #8A8B95; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .label { color: #B0B0B0; font-size: 12px; font-weight: 700; text-transform: uppercase; }
         .value { color: #fff; font-size: 16px; font-weight: 700; }
-        .value.xanh { color: #51F06B; }
+        .value.xanh { color: #FF3131; }
         .value.vang { color: #FFCF00; text-shadow: 0 0 10px rgba(255, 207, 0, 0.5); }
-        .input_key { background: #1C1E26; border: none; border-radius: 12px; padding: 16px; width: 100%; box-sizing: border-box; color: #fff; font-size: 16px; text-align: center; letter-spacing: 4px; margin-bottom: 16px; outline: none; }
+        .input_key { background: #2A0000; border: 1px solid #FF3131; border-radius: 12px; padding: 16px; width: 100%; box-sizing: border-box; color: #fff; font-size: 16px; text-align: center; letter-spacing: 4px; margin-bottom: 16px; outline: none; }
         .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
         .btn { border: none; border-radius: 12px; padding: 14px; width: 100%; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; text-align: center; }
-        .btn.xanh { background: #51F06B; color: #000; }
-        .btn.tri { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
-        .btn.tuong { background: rgba(255,255,255,0.05); color: #8A8B95; border: 1px solid rgba(255,255,255,0.05); margin-top: 10px; }
-        .btn.tuong.active { background: #51F06B; color: #000; box-shadow: 0 0 15px rgba(81, 240, 107, 0.4); }
-        .card_toggle { background: rgba(10, 12, 20, 0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; display: flex; align-items: center; margin-bottom: 12px; }
-        .card_icon { width: 44px; height: 44px; background: rgba(81,240,107,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 14px; font-size: 22px; }
+        .btn.xanh { background: #FF3131; color: #000; }
+        .btn.tri { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid #FF3131; }
+        .btn.tuong { background: rgba(255,255,255,0.05); color: #B0B0B0; border: 1px solid #FF3131; margin-top: 10px; }
+        .btn.tuong.active { background: #FF3131; color: #000; box-shadow: 0 0 15px rgba(255, 49, 49, 0.4); }
+        .card_toggle { background: rgba(30, 0, 0, 0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; display: flex; align-items: center; margin-bottom: 12px; }
+        .card_icon { width: 44px; height: 44px; background: rgba(255, 49, 49, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 14px; font-size: 22px; }
         .card_info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .card_title { color: #fff; font-size: 16px; font-weight: 700; }
-        .card_desc { color: #8A8B95; font-size: 12px; }
+        .card_desc { color: #B0B0B0; font-size: 12px; }
         .switch { position: relative; display: inline-block; width: 48px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2C2E3A; transition: .4s; border-radius: 24px; }
-        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: #5A5E6B; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: #51F06B; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2A2A2A; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: #555; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #FF3131; }
         input:checked + .slider:before { transform: translateX(24px); background-color: #fff; }
         .lock_overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 9999; }
-        .lock_box { background: #141620; border-radius: 24px; padding: 32px 24px; width: 85%; max-width: 320px; border: 1px solid rgba(81, 240, 107, 0.3); }
+        .lock_box { background: #1A0000; border-radius: 24px; padding: 32px 24px; width: 85%; max-width: 320px; border: 1px solid #FF3131; }
         .lock_title { color: #fff; font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 24px; }
         .lock_input_wrap { position: relative; width: 100%; margin-bottom: 24px; }
-        .lock_input { width: 100%; padding: 16px; padding-right: 50px; box-sizing: border-box; border: none; border-radius: 12px; background: #21232A; color: #fff; font-size: 16px; letter-spacing: 4px; text-align: center; outline: none; }
-        .toggle_pass { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #555; font-size: 24px; cursor: pointer; }
-        .lock_btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #51F06B; color: #000; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .lock_input { width: 100%; padding: 16px; padding-right: 50px; box-sizing: border-box; border: 1px solid #FF3131; border-radius: 12px; background: #2A0000; color: #fff; font-size: 16px; letter-spacing: 4px; text-align: center; outline: none; }
+        .lock_btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #FF3131; color: #000; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.2s; }
         .lock_btn:active { transform: scale(0.95); }
-        .lock_error { display: none; color: #FF3333; font-size: 14px; text-align: center; margin-top: 12px; }
+        .lock_error { display: none; color: #FF3131; font-size: 14px; text-align: center; margin-top: 12px; }
+        
+        /* Dropdown */
+        .dropdown { position: relative; display: inline-block; width: 100%; }
+        .dropbtn { background-color: #2A0000; color: white; padding: 14px; font-size: 14px; border: 1px solid #FF3131; border-radius: 12px; cursor: pointer; width: 100%; text-align: center; }
+        .dropbtn:hover, .dropbtn:focus { background-color: #3A0000; }
+        .dropdown-content { display: none; position: absolute; background-color: #1A0000; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8); border: 1px solid #FF3131; border-radius: 12px; z-index: 1; width: 100%; }
+        .dropdown-content div { color: white; padding: 12px 16px; text-decoration: none; display: block; cursor: pointer; text-align: center; border-bottom: 1px solid #2A0000; }
+        .dropdown-content div:hover {background-color: #3A0000;}
+        .show {display: block;}
     </style>
 </head>
 <body>
     <div class="lock_overlay" id="lockScreen">
         <div class="lock_box">
-            <div class="lock_title">🔐 Vào Bảo Mật - PANEL V1☠️</div>
+            <div class="lock_title">🔐 Vào Bảo Mật - Panel V1☠️</div>
             <div class="lock_input_wrap">
                 <input type="password" id="passInput" class="lock_input" placeholder=". . . ." maxlength="4" autofocus>
-                <button id="togglePassBtn" class="toggle_pass" onclick="togglePassVis()">👁️</button>
             </div>
             <button class="lock_btn" onclick="checkPass()">MỞ KHÓA</button>
-            <div class="lock_error" id="errorMsg">SAI PASS. Vui lòng nhập 2008</div>
+            <div class="lock_error" id="errorMsg">Sai mật khẩu</div>
         </div>
     </div>
 
     <div class="app">
         <div class="title">⚡ PANEL V1☠️</div>
+        
         <div class="card">
             <div class="grid">
                 <div class="dv"><div class="label">STATUS</div><div id="statusText" class="value">OFFLINE</div></div>
@@ -71,96 +79,56 @@
                 <div class="dv"><div class="label">PING</div><div class="value">-- ms</div></div>
                 <div class="dv"><div class="label">EXPIRY</div><div class="value vang">Unlimited</div></div>
             </div>
+            
             <input type="text" id="keyInput" class="input_key" placeholder=". . . . . . . . . . . ." value=". . . . . . . . . . . ." readonly>
-            <div class="btn-row">
+            
+            <!-- Dropdown chọn bản game -->
+            <div class="dropdown">
+                <button onclick="toggleDropdown()" class="dropbtn" id="gameSelectorBtn">Chọn Bản Game</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <div onclick="selectGame('TH')">Free Fire TH</div>
+                    <div onclick="selectGame('MAX')">Free Fire Max</div>
+                </div>
+            </div>
+
+            <div class="btn-row" style="margin-top: 12px;">
                 <button class="btn xanh" onclick="activeSystem()">XÁC NHẬN KEY</button>
-                <button class="btn tri" onclick="activateAimOverlay()">🎯 TÂM ẢO</button>
+                <button class="btn tri">⚡ LẤY KEY FREE</button>
             </div>
             <button id="runBtn" class="btn tuong" onclick="runSystem()">KHỞI CHẠY SYSTEM</button>
         </div>
 
         <div class="card_toggle">
             <div class="card_icon">🎯</div>
-            <div class="card_info"><div class="card_title">AI Aim Assist</div><div class="card_desc">Hỗ trợ ngắm và bù giật (Aim Assist)</div></div>
-            <label class="switch"><input type="checkbox" id="aimAssistToggle"><span class="slider"></span></label>
+            <div class="card_info"><div class="card_title">AimLock X</div><div class="card_desc">Hỗ trợ ghi tâm vùng đầu</div></div>
+            <label class="switch"><input type="checkbox" id="aimlockToggle"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
-            <div class="card_icon">⚡</div>
-            <div class="card_info"><div class="card_title">Fast Touch Mode</div><div class="card_desc">Tăng tốc độ cảm ứng và phản hồi</div></div>
-            <label class="switch"><input type="checkbox" id="fastTouchToggle"><span class="slider"></span></label>
+            <div class="card_icon">➕</div>
+            <div class="card_info"><div class="card_title">Aimbot Pro</div><div class="card_desc">Bật tâm siêu dính</div></div>
+            <label class="switch"><input type="checkbox" id="aimbotToggle"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
             <div class="card_icon">📲</div>
-            <div class="card_info"><div class="card_title">FPS Unlock 120Hz</div><div class="card_desc">Mở khóa tối đa FPS (nếu màn hình hỗ trợ)</div></div>
-            <label class="switch"><input type="checkbox" id="fpsUnlockToggle"><span class="slider"></span></label>
-        </div>
-        <div class="card_toggle">
-            <div class="card_icon">🕹️</div>
-            <div class="card_info"><div class="card_title">Touch Sensitivity</div><div class="card_desc">Tăng độ nhạy màn hình tối đa</div></div>
-            <label class="switch"><input type="checkbox" id="sensitivityToggle"><span class="slider"></span></label>
+            <div class="card_info"><div class="card_title">Boost FPS</div><div class="card_desc">Tối ưu tăng số quét</div></div>
+            <label class="switch"><input type="checkbox" id="fpsToggle"><span class="slider"></span></label>
         </div>
     </div>
 
     <script>
+        // URL chính xác để mở đúng bản
+        const URL_TH = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+        const URL_MAX = "https://play.google.com/store/apps/details?id=com.dts.freefiremax";
+        let selectedGame = "MAX"; // Mặc định là Max
+
         const passInput = document.getElementById('passInput');
-        const togglePassBtn = document.getElementById('togglePassBtn');
         const lockScreen = document.getElementById('lockScreen');
         const errorMsg = document.getElementById('errorMsg');
         const statusText = document.getElementById('statusText');
         const systemText = document.getElementById('systemText');
         const runBtn = document.getElementById('runBtn');
-        const aimAssistToggle = document.getElementById('aimAssistToggle');
-        const fastTouchToggle = document.getElementById('fastTouchToggle');
-        const fpsUnlockToggle = document.getElementById('fpsUnlockToggle');
-        const sensitivityToggle = document.getElementById('sensitivityToggle');
-
-        let isSystemActive = false;
-
-        function activateAimOverlay() {
-            let overlay = document.getElementById('aimOverlayDiv');
-            if (overlay) {
-                overlay.remove();
-                alert('Tâm ảo đã tắt');
-                return;
-            }
-            let div = document.createElement('div');
-            div.id = 'aimOverlayDiv';
-            div.style.position = 'fixed';
-            div.style.top = '50%';
-            div.style.left = '50%';
-            div.style.transform = 'translate(-50%, -50%)';
-            div.style.width = '120px';
-            div.style.height = '120px';
-            div.style.pointerEvents = 'none';
-            div.style.zIndex = '2147483647';
-            div.style.border = '3px solid cyan';
-            div.style.borderRadius = '50%';
-            div.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.8)';
-            document.body.appendChild(div);
-            alert('Tâm ảo đã bật');
-        }
-
-        function toggleCheatFunction(name, isChecked) {
-            if (!isSystemActive) {
-                alert('Vui lòng bấm "XÁC NHẬN KEY" trước!');
-                document.getElementById(name === 'AI Aim Assist' ? 'aimAssistToggle' : name === 'Fast Touch Mode' ? 'fastTouchToggle' : name === 'FPS Unlock 120Hz' ? 'fpsUnlockToggle' : 'sensitivityToggle').checked = false;
-                return;
-            }
-            let msg = isChecked ? 'BẬT' : 'TẮT';
-            alert(`[${name}] Đã ${msg}. Đang đồng bộ cấu hình...`);
-            console.log(`[CONFIG] ${name} set to ${isChecked}`);
-        }
-
-        aimAssistToggle.onchange = function() { toggleCheatFunction('AI Aim Assist', this.checked); };
-        fastTouchToggle.onchange = function() { toggleCheatFunction('Fast Touch Mode', this.checked); };
-        fpsUnlockToggle.onchange = function() { toggleCheatFunction('FPS Unlock 120Hz', this.checked); };
-        sensitivityToggle.onchange = function() { toggleCheatFunction('Touch Sensitivity', this.checked); };
-
-        function togglePassVis() {
-            if(passInput.type === 'password') { passInput.type = 'text'; togglePassBtn.innerText = '🙈'; }
-            else { passInput.type = 'password'; togglePassBtn.innerText = '👁️'; }
-        }
         
+        // Xử lý mật khẩu (không cho hiện/ẩn)
         function checkPass() {
             if(passInput.value === '2008') {
                 lockScreen.style.display = 'none';
@@ -171,6 +139,30 @@
             }
         }
 
+        // Dropdown
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Đóng dropdown khi bấm ra ngoài
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+        function selectGame(version) {
+            selectedGame = version;
+            document.getElementById('gameSelectorBtn').innerText = version === 'MAX' ? 'Free Fire Max' : 'Free Fire TH';
+            document.getElementById("myDropdown").classList.remove("show");
+        }
+
         function activeSystem() {
             statusText.innerText = 'ONLINE';
             statusText.className = 'value xanh';
@@ -178,20 +170,20 @@
             systemText.className = 'value xanh';
             runBtn.innerText = 'KHỞI CHẠY SYSTEM';
             runBtn.className = 'btn xanh';
-            isSystemActive = true;
-            alert('✅ Xác nhận Key thành công! Hệ thống sẵn sàng.');
+            alert('✅ Đã xác nhận Key. Nút đã sẵn sàng!');
         }
 
         function runSystem() {
-            if(!isSystemActive) {
-                alert('⚠️ Bạn chưa bấm Xác Nhận Key.');
+            if(systemText.innerText !== 'UNLOCKED') {
+                alert('⚠️ Bạn cần Xác Nhận Key trước!');
                 return;
             }
-            alert('🚀 Đang kích hoạt tối ưu cấu hình và mở Game...');
-            window.location.href = "freefiremax://";
+            if(selectedGame === 'MAX') {
+                window.location.href = URL_MAX;
+            } else {
+                window.location.href = URL_TH;
+            }
         }
-
-        passInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPass(); } });
     </script>
 </body>
 </html>
