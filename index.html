@@ -8,55 +8,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; padding: 0; background: #1A0000; font-family: 'Roboto', sans-serif; color: #fff; overflow: hidden; height: 100vh; }
+        body { margin: 0; padding: 0; background: #0D1326; font-family: 'Roboto', sans-serif; color: #fff; overflow: hidden; height: 100vh; }
         .app { max-width: 450px; margin: 0 auto; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; }
-        .title { text-align: center; font-size: 30px; font-weight: 900; color: #FF3131; text-shadow: 0 0 20px rgba(255, 49, 49, 0.6); margin-bottom: 20px; }
-        .card { background: rgba(30, 0, 0, 0.85); border: 1px solid rgba(255, 49, 49, 0.2); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
+        .title { text-align: center; font-size: 30px; font-weight: 900; color: #51F06B; text-shadow: 0 0 20px rgba(81, 240, 107, 0.4); margin-bottom: 20px; }
+        .card { background: rgba(10, 12, 20, 0.85); border: 1px solid rgba(81, 240, 107, 0.1); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
         .dv { display: flex; flex-direction: column; gap: 4px; }
-        .label { color: #B0B0B0; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+        .label { color: #8A8B95; font-size: 12px; font-weight: 700; text-transform: uppercase; }
         .value { color: #fff; font-size: 16px; font-weight: 700; }
-        .value.xanh { color: #FF3131; }
+        .value.xanh { color: #51F06B; }
         .value.vang { color: #FFCF00; text-shadow: 0 0 10px rgba(255, 207, 0, 0.5); }
-        .input_key { background: #2A0000; border: 1px solid #FF3131; border-radius: 12px; padding: 16px; width: 100%; box-sizing: border-box; color: #fff; font-size: 16px; text-align: center; letter-spacing: 4px; margin-bottom: 16px; outline: none; }
+        .input_key { background: #1C1E26; border: none; border-radius: 12px; padding: 16px; width: 100%; box-sizing: border-box; color: #fff; font-size: 16px; text-align: center; letter-spacing: 4px; margin-bottom: 16px; outline: none; }
         .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
         .btn { border: none; border-radius: 12px; padding: 14px; width: 100%; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; text-align: center; }
-        .btn.xanh { background: #FF3131; color: #000; }
-        .btn.tri { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid #FF3131; }
-        .btn.tuong { background: rgba(255,255,255,0.05); color: #B0B0B0; border: 1px solid #FF3131; margin-top: 10px; }
-        .btn.tuong.active { background: #FF3131; color: #000; box-shadow: 0 0 15px rgba(255, 49, 49, 0.4); }
-        .card_toggle { background: rgba(30, 0, 0, 0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; display: flex; align-items: center; margin-bottom: 12px; }
-        .card_icon { width: 44px; height: 44px; background: rgba(255, 49, 49, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 14px; font-size: 22px; }
+        .btn.xanh { background: #51F06B; color: #000; }
+        .btn.tri { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
+        .btn.tuong { background: rgba(255,255,255,0.05); color: #8A8B95; border: 1px solid rgba(255,255,255,0.05); margin-top: 10px; }
+        .btn.tuong.active { background: #51F06B; color: #000; box-shadow: 0 0 15px rgba(81, 240, 107, 0.4); }
+        .card_toggle { background: rgba(10, 12, 20, 0.85); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; display: flex; align-items: center; margin-bottom: 12px; }
+        .card_icon { width: 44px; height: 44px; background: rgba(81,240,107,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 14px; font-size: 22px; }
         .card_info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .card_title { color: #fff; font-size: 16px; font-weight: 700; }
-        .card_desc { color: #B0B0B0; font-size: 12px; }
+        .card_desc { color: #8A8B95; font-size: 12px; }
         .switch { position: relative; display: inline-block; width: 48px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2A2A2A; transition: .4s; border-radius: 24px; }
-        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: #555; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: #FF3131; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2C2E3A; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: #5A5E6B; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #51F06B; }
         input:checked + .slider:before { transform: translateX(24px); background-color: #fff; }
         .lock_overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 9999; }
-        .lock_box { background: #1A0000; border-radius: 24px; padding: 32px 24px; width: 85%; max-width: 320px; border: 1px solid #FF3131; }
+        .lock_box { background: #141620; border-radius: 24px; padding: 32px 24px; width: 85%; max-width: 320px; border: 1px solid rgba(81, 240, 107, 0.3); }
         .lock_title { color: #fff; font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 24px; }
         .lock_input_wrap { position: relative; width: 100%; margin-bottom: 24px; }
-        .lock_input { width: 100%; padding: 16px; padding-right: 50px; box-sizing: border-box; border: 1px solid #FF3131; border-radius: 12px; background: #2A0000; color: #fff; font-size: 16px; letter-spacing: 4px; text-align: center; outline: none; }
-        .lock_btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #FF3131; color: #000; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .lock_input { width: 100%; padding: 16px; padding-right: 50px; box-sizing: border-box; border: none; border-radius: 12px; background: #21232A; color: #fff; font-size: 16px; letter-spacing: 4px; text-align: center; outline: none; }
+        .toggle_pass { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #555; font-size: 24px; cursor: pointer; }
+        .lock_btn { width: 100%; padding: 16px; border: none; border-radius: 12px; background: #51F06B; color: #000; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.2s; }
         .lock_btn:active { transform: scale(0.95); }
-        .lock_error { display: none; color: #FF3131; font-size: 14px; text-align: center; margin-top: 12px; }
-
-        /* Dropdown */
-        .dropdown { position: relative; display: inline-block; width: 100%; }
-        .dropbtn { background-color: #2A0000; color: white; padding: 14px; font-size: 14px; border: 1px solid #FF3131; border-radius: 12px; cursor: pointer; width: 100%; text-align: center; }
-        .dropbtn:hover, .dropbtn:focus { background-color: #3A0000; }
-        .dropdown-content { display: none; position: absolute; background-color: #1A0000; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8); border: 1px solid #FF3131; border-radius: 12px; z-index: 1; width: 100%; }
-        .dropdown-content div { color: white; padding: 12px 16px; text-decoration: none; display: block; cursor: pointer; text-align: center; border-bottom: 1px solid #2A0000; }
-        .dropdown-content div:hover {background-color: #3A0000;}
-        .show {display: block;}
-
-        /* Popup key */
-        .key-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1A0000; border: 1px solid #FF3131; padding: 20px; border-radius: 12px; z-index: 10000; text-align: center; display: none; width: 80%; max-width: 300px; }
-        .key-popup button { margin-top: 12px; background: #FF3131; color: #000; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .lock_error { display: none; color: #FF3333; font-size: 14px; text-align: center; margin-top: 12px; }
     </style>
 </head>
 <body>
@@ -65,14 +53,16 @@
             <div class="lock_title">🔐 Vào Bảo Mật - Panel V1☠️</div>
             <div class="lock_input_wrap">
                 <input type="password" id="passInput" class="lock_input" placeholder=". . . ." maxlength="4" autofocus>
+                <button id="togglePassBtn" class="toggle_pass" onclick="togglePassVis()">👁️</button>
             </div>
             <button class="lock_btn" onclick="checkPass()">MỞ KHÓA</button>
-            <div class="lock_error" id="errorMsg">Sai mật khẩu</div>
+            <div class="lock_error" id="errorMsg">SAI PASS. Vui lòng nhập 2008</div>
         </div>
     </div>
 
     <div class="app">
         <div class="title">⚡ PANEL V1☠️</div>
+        
         <div class="card">
             <div class="grid">
                 <div class="dv"><div class="label">STATUS</div><div id="statusText" class="value">OFFLINE</div></div>
@@ -82,21 +72,12 @@
                 <div class="dv"><div class="label">PING</div><div class="value">-- ms</div></div>
                 <div class="dv"><div class="label">EXPIRY</div><div class="value vang">Unlimited</div></div>
             </div>
-
+            
             <input type="text" id="keyInput" class="input_key" placeholder=". . . . . . . . . . . ." value=". . . . . . . . . . . ." readonly>
-
-            <!-- Dropdown chọn bản game -->
-            <div class="dropdown">
-                <button onclick="toggleDropdown()" class="dropbtn" id="gameSelectorBtn">Chọn Bản Game</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <div onclick="selectGame('TH')">Free Fire TH</div>
-                    <div onclick="selectGame('MAX')">Free Fire Max</div>
-                </div>
-            </div>
-
-            <div class="btn-row" style="margin-top: 12px;">
+            
+            <div class="btn-row">
                 <button class="btn xanh" onclick="activeSystem()">XÁC NHẬN KEY</button>
-                <button class="btn tri" onclick="showFreeKeys()">⚡ LẤY KEY FREE</button>
+                <button class="btn tri">⚡ LẤY KEY FREE</button>
             </div>
             <button id="runBtn" class="btn tuong" onclick="runSystem()">KHỞI CHẠY SYSTEM</button>
         </div>
@@ -104,40 +85,39 @@
         <div class="card_toggle">
             <div class="card_icon">🎯</div>
             <div class="card_info"><div class="card_title">AimLock X</div><div class="card_desc">Hỗ trợ ghi tâm vùng đầu</div></div>
-            <label class="switch"><input type="checkbox" id="aimlockToggle"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
             <div class="card_icon">➕</div>
             <div class="card_info"><div class="card_title">Aimbot Pro</div><div class="card_desc">Bật tâm siêu dính</div></div>
-            <label class="switch"><input type="checkbox" id="aimbotToggle"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
         </div>
         <div class="card_toggle">
             <div class="card_icon">📲</div>
             <div class="card_info"><div class="card_title">Boost FPS</div><div class="card_desc">Tối ưu tăng số quét</div></div>
-            <label class="switch"><input type="checkbox" id="fpsToggle"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
         </div>
     </div>
 
-    <!-- Popup hiện 4 mã key miễn phí -->
-    <div class="key-popup" id="keyPopup">
-        <h3 style="color: #FF3131;">Key Miễn Phí</h3>
-        <div id="keyList" style="font-size: 18px; letter-spacing: 2px; margin: 16px 0; font-weight: bold;">- - - -</div>
-        <button onclick="closeKeyPopup()">ĐÓNG</button>
-    </div>
-
     <script>
-        // Mở thẳng app game bằng URL Scheme (chỉ hoạt động nếu app đã có trên máy)
-        const URL_TH = "freefireth://";
-        const URL_MAX = "freefiremax://";
-        let selectedGame = "MAX";
+        // ---------------------------------------------------------
+        // LINK TẢI GAME FF MAX ĐÃ CHỈNH LẠI (Link Google Drive của Garena)
+        const URL_GAME = "https://play.google.com/store/apps/details?id=com.dts.freefiremax"; 
+        // ---------------------------------------------------------
 
         const passInput = document.getElementById('passInput');
+        const togglePassBtn = document.getElementById('togglePassBtn');
         const lockScreen = document.getElementById('lockScreen');
         const errorMsg = document.getElementById('errorMsg');
         const statusText = document.getElementById('statusText');
         const systemText = document.getElementById('systemText');
         const runBtn = document.getElementById('runBtn');
-
+        
+        function togglePassVis() {
+            if(passInput.type === 'password') { passInput.type = 'text'; togglePassBtn.innerText = '🙈'; }
+            else { passInput.type = 'password'; togglePassBtn.innerText = '👁️'; }
+        }
+        
         function checkPass() {
             if(passInput.value === '2008') {
                 lockScreen.style.display = 'none';
@@ -146,28 +126,6 @@
                 errorMsg.style.display = 'block';
                 setTimeout(() => { errorMsg.style.display = 'none'; }, 3000);
             }
-        }
-
-        function toggleDropdown() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        function selectGame(version) {
-            selectedGame = version;
-            document.getElementById('gameSelectorBtn').innerText = version === 'MAX' ? 'Free Fire Max' : 'Free Fire TH';
-            document.getElementById("myDropdown").classList.remove("show");
         }
 
         function activeSystem() {
@@ -180,34 +138,17 @@
             alert('✅ Đã xác nhận Key. Nút đã sẵn sàng!');
         }
 
-        // Lấy 4 mã key ngẫu nhiên
-        function showFreeKeys() {
-            let keys = [];
-            for (let i = 0; i < 4; i++) {
-                let key = "";
-                for (let j = 0; j < 4; j++) {
-                    key += Math.floor(Math.random() * 10).toString();
-                }
-                keys.push(key);
-            }
-            document.getElementById('keyList').innerHTML = keys.join("<br>");
-            document.getElementById('keyPopup').style.display = 'block';
-        }
-        function closeKeyPopup() {
-            document.getElementById('keyPopup').style.display = 'none';
-        }
-
         function runSystem() {
             if(systemText.innerText !== 'UNLOCKED') {
                 alert('⚠️ Bạn cần Xác Nhận Key trước!');
                 return;
             }
-            if(selectedGame === 'MAX') {
-                window.location.href = URL_MAX;
-            } else {
-                window.location.href = URL_TH;
-            }
+            // Mở app FF Max trên CH Play
+            alert('🚀 Đang chuyển hướng sang Free Fire Max...');
+            window.location.href = URL_GAME;
         }
+
+        passInput.addEventListener('keypress', function(e) { if (e.key === 'Enter') { checkPass(); } });
     </script>
 </body>
 </html>
